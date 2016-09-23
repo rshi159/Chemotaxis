@@ -10,8 +10,8 @@ int prey;
  	{
  		colony[i] = new Bacteria();
  	}
- 	group = new Eater[10];
- 	for(int i = 0; j < group.length; j++)
+ 	group = new Eater[2];
+ 	for(int j = 0; j < group.length; j++)
  	{
  		group[j] = new Eater();
  	}
@@ -19,15 +19,19 @@ int prey;
  }   
  void draw()   
  {    
- 	if(frameCount%25 == 0)
+ 	if(frameCount%3 == 0)
  		background(205);
  	for(int i = 0; i < colony.length; i++)
  	{
   		colony[i].show();
  		colony[i].move();//move and show the bacteria   
+ 	}
+ 	for(int j = 0; j < group.length; j++)
+ 	{
  		group[j].show();
  		group[j].move();
  	}
+ 	 		System.out.print(prey);
  }  
  class Bacteria    
  {     
@@ -36,11 +40,12 @@ int prey;
  	{
  		myX = 360;
  		myY = 360;
+ 		myColor = (int)(Math.random()*255);
  	}
  	void move()
  	{
-		myX = myX + (int)(Math.random()*10-5);
- 		myY = myY + (int)(Math.random()*10-5);
+		myX = myX + (int)(Math.random()*20-10);
+ 		myY = myY + (int)(Math.random()*20-10);
  		if(myX >= 720)
  			myX = myX - 30;
  		else if(myX <= 0)
@@ -52,37 +57,45 @@ int prey;
  	}
  	void show()
  	{
- 		fill(230);
+ 		fill(myColor);
  		ellipse(myX,myY,15,15);
  	}
- 	void mosePressed()
+ }
+ 
+ void mousePressed()
  	{
- 		int prey = (int)Math.random()*11;
+ 		if(mousePressed == true)
+ 		{
+ 			prey = (int)(Math.random()*10);
+ 		}
  	}
- 	class Eater
+ 
+ 
+ class Eater
  	{
- 		int myX. myY, myColor;
- 		Eater()
- 		{
- 			myX = 20;
- 			myY = 20;
- 			myColor = 190;
- 		}
- 		void move()
- 		{
- 			if(myX >= colony[prey].myX)
- 				myX = myX + (int)(Math.random*14-10);
- 			else if(myX < colony[prey].myX)
- 				myX = myX - (int)(Math.random*14-10);
-
- 			
- 		}
- 		void show()
- 			{
- 				fill(myColor,0,0);
- 				ellipse(myX, myY, 25,25);
- 			}
-
+ 	int myX, myY, myColor;
+ 	Eater()
+ 	{
+ 		myX = 20;
+ 		myY = 20;
+ 		myColor = 190;
  	}
+ 	void move()
+	{
+		if(myX >= colony[prey].myX)
+			myX = myX + (int)(Math.random()*14-10);
+		else if(myX < colony[prey].myX)
+			myX = myX - (int)(Math.random()*14-10);
+		if(myY >= colony[prey].myY)
+			myY = myY + (int)(Math.random()*14-10);
+		else if(myY < colony[prey].myY)
+			myY = myY - (int)(Math.random()*14-10);			
+		
+ 	}
+ 	void show()
+ 		{
+ 			fill(myColor,0,0);
+ 			ellipse(myX, myY, 25,25);
+ 		}
 
- }    
+ 	}   
